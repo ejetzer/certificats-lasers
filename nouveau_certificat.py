@@ -23,6 +23,7 @@ conf.read('nouveau_certificat.config')
 sec = 'Émile'  # À changer selon qui utilise le script
 CHEMIN = Path(conf.get(sec, 'Chemin')).expanduser()
 FEUILLE = Path(conf.get(sec, 'Feuille')).expanduser()
+UNOCONV_PY = conf.get(sec, 'unoconv')
 MÀJ = dt.fromisoformat(conf.get(sec, 'Dernière màj'))
 
 
@@ -173,8 +174,9 @@ class Fenetre(tk.Frame):
         conf.set(sec, 'Dernière màj', self.var_dernière_màj.get())
         with open('nouveau_certificat.config', 'w') as fichier:
             conf.write(fichier)
-
-        run(['unoconv', '-f', 'pdf', 'res/*.pptx'])
+        
+        unoconv = str(run(['which', 'unoconv'], capture_output=True).stdout, encoding='utf-8').strip()
+        run([UNOCONV_PY, unoconv, '-f', 'pdf', 'res/*.pptx'])
         run(['rm', '-rf', 'res/*.pptx'])
         self.master.destroy()
 

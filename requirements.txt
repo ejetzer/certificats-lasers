@@ -17,4 +17,5 @@ protobuf==3.17.3
 pyOpenSSL==20.0.1
 simplejson==3.17.5
 unicodedata2==13.0.0.post2
-wincertstore==0.2.1
+wincertstore
+python-pptx
