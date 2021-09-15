@@ -54,7 +54,7 @@ def nouveau_certificat(nom: str, matricule: str, modèle: Path = CHEMIN):
                     elif ligne.text.startswith('Date'):
                         date = dt.today()
                         ligne.text = f'Date: {date.year}-{date.month:02}'
-    temp = Path(f'{nom}.pptx')
+    temp = Path(f'res/{nom}.pptx')
     cert.save(temp)
     #run(['unoconv', '-f', 'pdf', f'"{nom}.pptx"'])
     #temp.unlink()
@@ -174,7 +174,8 @@ class Fenetre(tk.Frame):
         with open('nouveau_certificat.config', 'w') as fichier:
             conf.write(fichier)
 
-        run(['unoconv', '-f', 'pdf', '*.pptx'])
+        run(['unoconv', '-f', 'pdf', 'res/*.pptx'])
+        run(['rm', '-rf', 'res/*.pptx'])
         self.master.destroy()
 
 
