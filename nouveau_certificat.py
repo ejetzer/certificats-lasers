@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.9
+﻿#!python3
 # -*- coding: utf-8 -*-
 
 """
